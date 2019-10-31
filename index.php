@@ -13,6 +13,24 @@ try {
                 // Erreur ! On arrête tout, on envoie une exception, donc au saute directement au catch
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+        } elseif ($_GET['action'] == 'formUpdateComment') {
+
+            if (isset($_GET['id']) && $_GET['id'] > 0 && isset($_GET['idComment']) && $_GET['idComment'] > 0) {
+                formUpdateCommand($_GET['id'], $_GET['idComment']);
+            } else {
+                throw new Exception('Erreur : tous les champs ne sont pas remplis !');
+            }
+        } elseif ($_GET['action'] == 'updateComment') {
+
+            if (isset($_GET['id']) && $_GET['id'] > 0 && isset($_GET['idComment']) && $_GET['idComment'] > 0) {
+                if (!empty($_POST['comment'])) {
+                    updateCommand($_GET['id'], $_GET['idComment'], $_POST['comment']);
+                } else {
+                    throw new Exception('Erreur : tous les champs ne sont pas remplis !');
+                }
+            } else {
+                throw new Exception('Erreur : tous les champs ne sont pas remplis !');
+            }
         } elseif ($_GET['action'] == 'addComment') {
 
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -25,7 +43,7 @@ try {
                 throw new Exception('Erreur : tous les champs ne sont pas remplis !');
             }
         } else {
-            
+
             listPosts();
         }
     } else {

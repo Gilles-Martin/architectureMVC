@@ -16,29 +16,22 @@
     </p>
 </div>
 
-<h2>Commentaires</h2>
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+<h2>Modification du commentaire</h2>
+
+<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&amp;idComment=<?= $comment['id'] ?>" method="post">
     <div>
         <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" />
+        <input type="text" id="author" value="<?= $comment['author'] ?>" disabled/>
     </div>
     <div>
         <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
+        <textarea id="comment" name="comment"><?= $comment['comment'] ?></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input type="submit" value="Modifier le commentaire" />
     </div>
 </form>
 
-<?php
-while ($comment = $comments->fetch()) {
-    ?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?> (<a href="index.php?action=formUpdateComment&id=<?= $post['id'] ?>&idComment=<?= $comment['id'] ?>">modifier</a>)</p>
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    <?php
-}
-?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
